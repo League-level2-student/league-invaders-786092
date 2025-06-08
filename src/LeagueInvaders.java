@@ -10,6 +10,7 @@ public class LeagueInvaders {
 		frame.setVisible(true);
 		frame.setSize(WIDTH,HEIGHT);
 		frame.add(panel);
+		frame.addKeyListener(panel);
 		}
 	public void setup() {
 		
