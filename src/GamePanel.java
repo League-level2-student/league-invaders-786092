@@ -50,11 +50,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 		g.setFont(titleFont);
 		g.setColor(Color.YELLOW);
-		g.drawString("League Invaders", 75, 50);
+		g.drawString("League Invaders", 60, 50);
 		g.setFont(startFont);
 		g.setColor(Color.YELLOW);
-		g.drawString("Press ENTER to Start!", 75, 200);
-		g.drawString("Press SPACE for Instructions", 50, 500);
+		g.drawString("Press ENTER to Start!", 85, 300);
+		g.drawString("Press SPACE for Instructions", 40, 475);
 	    
 	}
 	public void drawGameState(Graphics g) {
@@ -65,8 +65,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.RED);
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 		g.setFont(titleFont);
-		g.setColor(Color.white);
-		g.drawString("Game Over", 75, 50);
+		g.setColor(Color.YELLOW);
+		g.drawString("Game Over", 110, 50);
+		g.setFont(startFont);
+		g.setColor(Color.YELLOW);
+		g.drawString("You killed enemies", 100, 300);
+		g.drawString("Press ENTER to Restart", 75, 475);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
