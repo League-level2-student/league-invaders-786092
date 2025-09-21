@@ -15,5 +15,6 @@ public class Alien extends GameObject {
 	public void update() {
 		y+=speed;
 	}
+	
 
 }
