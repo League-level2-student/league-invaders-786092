@@ -11,4 +11,8 @@ public class GameObject {
         this.width = width;
         this.height = height;
     }
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 }
