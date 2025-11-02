@@ -18,22 +18,22 @@ public class ObjectManager {
 	 }
 	 public void update() {
 		 for (int i = 0; i < alien.size(); i++) {
-		        Alien a = alien.get(i);
-		        a.update();
-		        if (a.y > LeagueInvaders.HEIGHT) {
-		            a.isActive = false;
-		        }
-		        
+			 Alien a = alien.get(i);
+		     a.update();
+		     if (a.y > LeagueInvaders.HEIGHT) {
+		    	 a.isActive = false;
+		     }
 		 }
+
 		 for (int i = 0; i < project.size(); i++) {
 			 Projectile p = project.get(i);
-			 p.update();
-			 
-			 if(p.y < 0 || p.y > LeagueInvaders.HEIGHT) {
-				 p.isActive = false;
-			 }
+		     p.update();
+		     if (p.y < 0 || p.y > LeagueInvaders.HEIGHT) {
+		    	 p.isActive = false;
+		     }
 		 }
-		 
+		 checkCollision();
+		 purgeObjects();
 	 }
 	 public void draw(Graphics g) {
 		rocket.draw(g);
@@ -55,5 +55,22 @@ public class ObjectManager {
 		            project.remove(i);
 		        }
 		    }
+	 }
+	 void checkCollision() {
+		 for (Alien a : alien) {
+			 if (a.collisionBox.intersects(rocket.collisionBox)) {
+		            a.isActive = false;
+		            rocket.isActive = false;
+		     }
+		 }
+
+		 for (Projectile p : project) {
+		     for (Alien a : alien) {
+		    	 if (p.collisionBox.intersects(a.collisionBox)) {
+		    		 p.isActive = false;
+		             a.isActive = false;
+		         }
+		     }
+		 }
 	 }
 }
