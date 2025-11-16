@@ -7,6 +7,7 @@ public class ObjectManager {
 	ArrayList<Projectile> project = new ArrayList<Projectile>();
 	ArrayList<Alien> alien = new ArrayList<Alien>();
 	Random rand = new Random();
+	int score = 0;
 	 public ObjectManager(Rocketship r) {
 	        this.rocket = r;
 	    }
@@ -35,6 +36,11 @@ public class ObjectManager {
 		 checkCollision();
 		 purgeObjects();
 	 }
+	 
+	 int getScore() {
+		    return score;
+	 }
+	 
 	 public void draw(Graphics g) {
 		rocket.draw(g);
 		for(Alien a : alien) {
@@ -69,6 +75,7 @@ public class ObjectManager {
 		    	 if (p.collisionBox.intersects(a.collisionBox)) {
 		    		 p.isActive = false;
 		             a.isActive = false;
+		             score++;
 		         }
 		     }
 		 }
