@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font startFont;
 	Timer frameDraw;
+	Timer alienSpawn;
 	Rocketship rocket = new Rocketship(250,700,50,50);
 	ObjectManager object;
 	public static BufferedImage image;
@@ -34,6 +35,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	    if (needImage) {
 	            loadImage("space.png");
 	    }
+	}
+	
+	void startGame() {
+	    alienSpawn = new Timer(1000, object);
+	    alienSpawn.start();
 	}
 	
 	void loadImage(String imageFile) {
@@ -135,29 +141,41 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
-			if(currentState==END) {
-				currentState = MENU;
-				rocket = new Rocketship(250, 700, 50, 50);   // new rocket
-				object = new ObjectManager(rocket);
-			}
-			else {
-				currentState++;
-			}
-		}
-		if(e.getKeyCode()==KeyEvent.VK_UP) {
-			rocket.up = true;
-		}
-		if(e.getKeyCode()==KeyEvent.VK_DOWN) {
-			rocket.down = true;
-		}
-		if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-			rocket.right = true;
-		}
-		if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-			rocket.left = true;
-		}
+	    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+	        if (currentState == END) {
+	            currentState = MENU;
+	            rocket = new Rocketship(250, 700, 50, 50);
+	            object = new ObjectManager(rocket);
+	        } else {
+	            currentState++;
+	        }
+
+	        if (currentState == GAME) {
+	            startGame();
+	        }
+
+	        if (currentState == END && alienSpawn != null) {
+	            alienSpawn.stop();
+	        }
+	    }
+
+	    if (e.getKeyCode() == KeyEvent.VK_SPACE && currentState == GAME) {
+	        object.addProjectile(rocket.getProjectile());
+	    }
+
+	    if (e.getKeyCode() == KeyEvent.VK_UP) {
+	        rocket.up = true;
+	    }
+	    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+	        rocket.down = true;
+	    }
+	    if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+	        rocket.right = true;
+	    }
+	    if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+	        rocket.left = true;
+	    }
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
