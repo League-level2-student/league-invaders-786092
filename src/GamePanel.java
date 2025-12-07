@@ -33,7 +33,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	    frameDraw.start();
 	    object = new ObjectManager(rocket);
 	    if (needImage) {
-	            loadImage("space.png");
+	    	loadImage("space.png");
 	    }
 	}
 	
@@ -60,25 +60,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	    if (currentState == MENU) {
 	        drawMenuState(g);
 
-	    } else if (currentState == GAME) {
-	        if (gotImage) {
-	            g.drawImage(image, 0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null);
-	        } else {
-	            g.setColor(Color.BLACK);
-	            g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
-	        }
-
-	        drawGameState(g);
+	    } 
+	    else if (currentState == GAME) {
+	    	drawGameState(g);
 
 	    } else if (currentState == END) {
 	        drawEndState(g);
 	    }
 	}
 	public void updateMenuState() {
-		object.update();
+		
 	}
 	public void updateGameState() {
 		rocket.update();
+		object.update();
 		if(rocket.isActive == false) {
 			currentState = END;
 		}
@@ -99,8 +94,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	    
 	}
 	public void drawGameState(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		if (gotImage) {
+            g.drawImage(image, 0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null);
+        } else {
+            g.setColor(Color.BLACK);
+            g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+        }
 		
 		rocket.draw(g);
 		object.draw(g);
@@ -117,7 +116,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Game Over", 110, 50);
 		g.setFont(startFont);
 		g.setColor(Color.YELLOW);
-		g.drawString("You killed enemies", 100, 300);
+		g.drawString("You killed "+ object.getScore() + " enemies", 100, 300);
 		g.drawString("Press ENTER to Restart", 75, 475);
 	}
 	@Override

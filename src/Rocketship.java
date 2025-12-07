@@ -50,16 +50,16 @@ public class Rocketship extends GameObject {
 	}
 	public void update() {
 		super.update();
-		if(right) {
+		if(right && x+speed<LeagueInvaders.WIDTH) {
 			x+=speed;
 		}
-		if(left) {
+		if(left && x-speed>0) {
 			x-=speed;
 		}
-		if(up) {
+		if(up && y-speed>0) {
 			y-=speed;
 		}
-		if(down) {
+		if(down && y+speed<LeagueInvaders.HEIGHT) {
 			y+=speed;
 		}
 	}
